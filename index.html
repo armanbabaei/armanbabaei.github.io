@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arman Babaei — Aeronautical Engineer</title>
+  <meta name="description" content="Arman Babaei — Aeronautical Engineer specializing in CFD, turbomachinery, propulsion systems, aerospace design, and manufacturing." />
+  <meta name="keywords" content="Arman Babaei, Aeronautical Engineer, Aerospace Engineering, CFD, Turbomachinery, Propulsion, ANSYS Fluent, OpenFOAM, MATLAB, Politecnico di Milano" />
+  <meta name="author" content="Arman Babaei" />
+  <meta property="og:title" content="Arman Babaei — Aeronautical Engineer" />
+  <meta property="og:description" content="Portfolio of Arman Babaei: aerospace engineering, CFD, turbomachinery, propulsion systems, and manufacturing projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/profile.jpg" />
+  <meta property="og:url" content="https://babaei.it" />
+  <link rel="preload" as="image" href="images/profile.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f9f7f2;
+      --ink: #1c1b18;
+      --ink-mid: #5c5a53;
+      --ink-light: #9c9a92;
+      --ink-faint: #e2dfd6;
+      --accent: #b8860b;
+      --accent-light: #f5f0e8;
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(249,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--ink-faint);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    /* ── Sections ── */
+    section { padding: 7rem 3rem; max-width: 900px; margin: 0 auto; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 5rem;
+      padding-top: 8rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em { font-style: italic; color: var(--ink-mid); }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--ink);
+      padding: 12px 28px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+    .btn-secondary {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 0.5px solid var(--ink-faint);
+      padding: 12px 28px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    .hero-photo { position: relative; display: flex; align-items: center; justify-content: center; }
+
+    .photo-frame {
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-width: 340px;
+      background: var(--ink-faint);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--ink-light);
+    }
+
+    .photo-placeholder p { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
+
+    .photo-accent {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 80px;
+      height: 80px;
+      border: 1.5px solid var(--accent);
+      z-index: -1;
+    }
+
+    /* ── Section headings ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 400;
+      letter-spacing: -0.3px;
+    }
+
+    .section-line { flex: 1; height: 0.5px; background: var(--ink-faint); margin-bottom: 4px; }
+
+    /* ── About ── */
+    #about { background: var(--accent-light); max-width: 100%; padding: 7rem 3rem; }
+
+    .about-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p { font-size: 15px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.25rem; }
+
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+    .stat { border-top: 1px solid var(--ink-faint); padding-top: 1rem; }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
+
+    /* ── Timeline ── */
+    .timeline { display: flex; flex-direction: column; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-top: 0.5px solid var(--ink-faint);
+    }
+
+    .timeline-item:last-child { border-bottom: 0.5px solid var(--ink-faint); }
+
+    .timeline-date { font-size: 11px; letter-spacing: 0.06em; color: var(--ink-light); padding-top: 4px; }
+
+    .timeline-title { font-family: var(--serif); font-size: 17px; font-weight: 400; margin-bottom: 4px; }
+
+    .timeline-org { font-size: 12px; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+
+    .timeline-desc { font-size: 13.5px; color: var(--ink-mid); line-height: 1.75; }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+      background: var(--ink-faint);
+    }
+
+    .project-card { background: var(--cream); padding: 2.25rem; transition: background 0.2s, transform 0.15s; color: inherit; text-decoration: none; display: block; }
+    .project-card:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+    .project-cat { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+
+    .project-title { font-family: var(--serif); font-size: 17px; font-weight: 400; margin-bottom: 10px; line-height: 1.3; }
+
+    .project-desc { font-size: 13px; color: var(--ink-mid); line-height: 1.7; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.25rem; }
+
+    .project-tag {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      border: 0.5px solid var(--ink-faint);
+      padding: 3px 9px;
+    }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+
+    .skill-group-title {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 0.5px solid var(--ink-faint);
+    }
+
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+    .skill-list li { font-size: 13px; color: var(--ink-mid); padding-left: 14px; position: relative; }
+
+    .skill-list li::before { content: '—'; position: absolute; left: 0; color: var(--ink-faint); font-size: 10px; top: 3px; }
+
+    /* ── Languages ── */
+    .langs-row { display: flex; gap: 0; background: var(--ink-faint); }
+
+    .lang-item { flex: 1; background: var(--cream); margin: 0.5px; padding: 1.75rem; text-align: center; }
+
+    .lang-name { font-family: var(--serif); font-size: 18px; font-weight: 400; margin-bottom: 6px; }
+
+    .lang-level { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); }
+
+    /* ── Honours ── */
+    .honour-item {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 0.5px solid var(--ink-faint);
+      align-items: start;
+    }
+
+    .honour-item:last-child { border-bottom: 0.5px solid var(--ink-faint); }
+
+    .honour-year { font-size: 11px; color: var(--ink-light); letter-spacing: 0.06em; padding-top: 2px; }
+
+    .honour-text { font-size: 14px; color: var(--ink-mid); line-height: 1.65; }
+
+    /* ── Contact ── */
+    #contact { background: var(--ink); max-width: 100%; padding: 7rem 3rem; }
+
+    .contact-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+    #contact h2 { color: var(--cream); }
+    #contact .section-eyebrow { color: var(--accent); }
+    #contact .section-line { background: rgba(255,255,255,0.1); }
+
+    .contact-text { font-size: 15px; color: rgba(249,247,242,0.6); line-height: 1.8; margin-top: 1.5rem; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 1.25rem 1.5rem;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); background: rgba(184,134,11,0.08); }
+
+    .contact-link-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+
+    .contact-link-value { font-size: 14px; color: var(--cream); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid var(--ink-faint);
+    }
+
+    footer p { font-size: 11px; color: var(--ink-light); letter-spacing: 0.06em; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.25s; }
+    .fade-up:nth-child(3) { animation-delay: 0.4s; }
+    .fade-up:nth-child(4) { animation-delay: 0.55s; }
+
+    .timeline-item, .project-card, .skill-group-title, .lang-item, .honour-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      .nav-links a { font-size: 10px; }
+      section { padding: 5rem 1.5rem; }
+      #hero { grid-template-columns: 1fr; gap: 3rem; padding-top: 7rem; min-height: auto; }
+      .hero-photo { order: -1; }
+      .photo-frame { max-width: 220px; margin: 0 auto; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      #about, #contact { padding: 5rem 1.5rem; }
+      .about-inner, .contact-inner { max-width: 100%; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .langs-row { flex-wrap: wrap; }
+      .lang-item { min-width: 30%; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Arman Babaei</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <span class="hero-eyebrow fade-up">Aeronautical Engineer</span>
+      <h1 class="fade-up">Arman<br><em>Babaei</em></h1>
+      <p class="hero-desc fade-up">Master's student at Politecnico di Milano. Specialising in CFD, turbomachinery, and propulsion systems. Hands-on experience from CNC machining to orbital mechanics.</p>
+      <div class="hero-links fade-up">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="cv.pdf" class="btn-secondary" download>Download CV</a>
+        <a href="#contact" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <img src="images/profile.jpg" alt="Portrait of Arman Babaei" loading="eager" />
+      </div>
+      <div class="photo-accent"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-header" style="margin-bottom:2rem">
+          <span class="section-eyebrow">About</span>
+          <div class="section-line"></div>
+          <h2>Who I am</h2>
+        </div>
+        <p>I'm an aeronautical engineering master's student at Politecnico di Milano, building on a strong aerospace foundation from Sharif University of Technology — one of the top technical universities in the Middle East.</p>
+        <p>My work spans the full spectrum from theoretical fluid dynamics and propulsion design to hands-on CNC machining and engine tuning. I bring both analytical rigour and practical precision to every project.</p>
+        <p>Internationally educated across Iran, Italy, and Russia, and decorated in mathematics and robotics competitions since high school.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">7+</div><div class="stat-label">Years engineering</div></div>
+        <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Projects completed</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Languages spoken</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Countries studied in</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-eyebrow">Career</span>
+      <div class="section-line"></div>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2025</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Test Inspector</div>
+          <div class="timeline-org">TAPCO &amp; Boldrocchi</div>
+          <div class="timeline-desc">Technical representative for TAPCO during the turbomachine acquisition procedure at the manufacturer's testing facility (Boldrocchi).</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2023</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Summer School — Orbital Mechanics</div>
+          <div class="timeline-org">Bauman Moscow State Technical University</div>
+          <div class="timeline-desc">Collaborated with the orbital mechanics team; trajectory planning using STK software.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jan – Jun 2023</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Co-op — Aircraft Equipment Engineering</div>
+          <div class="timeline-org">Mapna Aero</div>
+          <div class="timeline-desc">Engine and aircraft systems engineering; investigation and analysis of Component Maintenance Manuals (CMM).</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2021 – Mar 2022</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Co-op — CNC Programming &amp; Operation</div>
+          <div class="timeline-org">Manufacturing Site</div>
+          <div class="timeline-desc">Full site authority after one month of training. 3-axis milling with Siemens 810d controller. Autodesk PowerMill (CAM) and Inventor (CAD).</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2020 – Nov 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Content Writer &amp; Social Media Manager</div>
+          <div class="timeline-org">Entrepreneurship Center, Sharif University</div>
+          <div class="timeline-desc">Managed centre's social media channels, aligned with Economics &amp; Management minor studies.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:5rem">
+      <span class="section-eyebrow">Academic</span>
+      <div class="section-line"></div>
+      <h2>Education</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2023 – present</div>
+        <div class="timeline-content">
+          <div class="timeline-title">MSc Aeronautical Engineering</div>
+          <div class="timeline-org">Politecnico di Milano · Italy</div>
+          <div class="timeline-desc">Aerodynamics, Turbomachinery, Aeroelasticity, Computational Thermochemical Propulsion. Thesis: 3D-printed high-strength aluminium alloys for aerospace applications.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2018 – 2023</div>
+        <div class="timeline-content">
+          <div class="timeline-title">BSc Aerospace Engineering (Co-op)</div>
+          <div class="timeline-org">Sharif University of Technology · Iran</div>
+          <div class="timeline-desc">CFD, Aerodynamics I &amp; II, Numerical Methods. Minor in Economics &amp; Management. Thesis: exhaust system fluid dynamics and manufacturing optimisation for high-performance engines.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2014 – 2018</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Math &amp; Physics — SAMPAD</div>
+          <div class="timeline-org">National Organisation for Development of Exceptional Talents</div>
+          <div class="timeline-desc">Bronze medal, World Mathematics Invitational Finals, Malaysia. Silver medal, National Co-Space Rescue Robots competition.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="padding-top:0">
+    <div class="section-header">
+      <span class="section-eyebrow">Portfolio</span>
+      <div class="section-line"></div>
+      <h2>Selected Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-cat">Propulsion</div>
+        <div class="project-title">Turbojet Engine Design</div>
+        <div class="project-desc">Initial design of a high-pressure turbine &amp; compressor for an aerial turbojet (Joule-Brayton cycle). Modelled combustion chamber mass and energy conservation in MATLAB.</div>
+        <div class="project-tags"><span class="project-tag">MATLAB</span><span class="project-tag">Turbomachinery</span><span class="project-tag">Thermodynamics</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-cat">Propulsion</div>
+        <div class="project-title">CubeSat Micro-Thruster</div>
+        <div class="project-desc">Propulsion system for a 3U CubeSat: 5 mN thrust, 0.5 m/s ΔV. Evaluated solid propellant, vapor expansion, cold gas, and bipropellant architectures.</div>
+        <div class="project-tags"><span class="project-tag">Space</span><span class="project-tag">Propulsion</span><span class="project-tag">Systems design</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-cat">Aerodynamics &amp; CFD</div>
+        <div class="project-title">Heavy-Duty Truck Drag Reduction</div>
+        <div class="project-desc">Reduced drag coefficient for European heavy-duty trucks by adding fairings and optimising 3D geometry using ANSYS Fluent. Post-processing in ParaView.</div>
+        <div class="project-tags"><span class="project-tag">ANSYS Fluent</span><span class="project-tag">CFD</span><span class="project-tag">ParaView</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-cat">Aerodynamics &amp; CFD</div>
+        <div class="project-title">Combustion Chamber Simulation</div>
+        <div class="project-desc">Reacting flow in OpenFOAM from incompressible to compressible regimes with Lagrangian Particle Tracking for spray-wall interactions.</div>
+        <div class="project-tags"><span class="project-tag">OpenFOAM</span><span class="project-tag">Reacting flow</span><span class="project-tag">LPT</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-cat">Manufacturing</div>
+        <div class="project-title">TU5 Engine Upgrade</div>
+        <div class="project-desc">38% power increase via aftermarket components and custom-machined parts including valves, pistons, and camshaft pulley for precise compatibility.</div>
+        <div class="project-tags"><span class="project-tag">CNC Machining</span><span class="project-tag">Automotive</span><span class="project-tag">Inventor</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-cat">Programming</div>
+        <div class="project-title">Quadrotor Dynamics Simulation</div>
+        <div class="project-desc">6-DOF quadrotor model in Simulink with PID controllers for each motor to maintain stability under wind disturbances.</div>
+        <div class="project-tags"><span class="project-tag">Simulink</span><span class="project-tag">PID Control</span><span class="project-tag">MATLAB</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-eyebrow">Expertise</span>
+      <div class="section-line"></div>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group-title">Programming</div>
+        <ul class="skill-list">
+          <li>MATLAB</li><li>Python</li><li>C / C++</li><li>Arduino</li><li>AMPL (optimisation)</li><li>CNC G&amp;M code</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skill-group-title">Simulation &amp; CAE</div>
+        <ul class="skill-list">
+          <li>ANSYS Fluent</li><li>OpenFOAM</li><li>Simulink</li><li>STK</li><li>Gambit</li><li>ParaView</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skill-group-title">CAD &amp; Manufacturing</div>
+        <ul class="skill-list">
+          <li>Autodesk Inventor</li><li>SolidWorks</li><li>Onshape</li><li>PowerMill (CAM)</li><li>AutoCAD</li><li>CNC 3-axis milling</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:4rem">
+      <div class="section-header">
+        <span class="section-eyebrow">Languages</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="langs-row">
+        <div class="lang-item"><div class="lang-name">Persian</div><div class="lang-level">Native</div></div>
+        <div class="lang-item"><div class="lang-name">English</div><div class="lang-level">B2</div></div>
+        <div class="lang-item"><div class="lang-name">Italian</div><div class="lang-level">A2</div></div>
+        <div class="lang-item"><div class="lang-name">Arabic</div><div class="lang-level">A2</div></div>
+        <div class="lang-item"><div class="lang-name">German</div><div class="lang-level">A1</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONOURS -->
+  <section id="honours" style="padding-top:0">
+    <div class="section-header">
+      <span class="section-eyebrow">Recognition</span>
+      <div class="section-line"></div>
+      <h2>Honours &amp; Awards</h2>
+    </div>
+    <div class="honours-list">
+      <div class="honour-item"><div class="honour-year">2023</div><div class="honour-text">Admitted to MSc Aerospace Engineering at Case Western Reserve University, George Washington University, and Politecnico di Milano.</div></div>
+      <div class="honour-item"><div class="honour-year">2023</div><div class="honour-text">Straight admission offer for MSc Aerospace Engineering — Sharif University of Technology.</div></div>
+      <div class="honour-item"><div class="honour-year">2018</div><div class="honour-text">Ranked top 400 out of 144,000 students in the National University Entrance Exam, Iran.</div></div>
+      <div class="honour-item"><div class="honour-year">2016</div><div class="honour-text">Bronze medal, World Mathematics Invitational (WMI) Finals, Malaysia.</div></div>
+      <div class="honour-item"><div class="honour-year">2016</div><div class="honour-text">2nd place, Salam Cup Robotics Competition; international competition participation.</div></div>
+      <div class="honour-item"><div class="honour-year">2015</div><div class="honour-text">Ranked 6th in national mathematics selection exam among 5,000 talented students. Participant, WMTC International Mathematics Competition.</div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="section-header">
+          <span class="section-eyebrow">Contact</span>
+          <div class="section-line"></div>
+          <h2>Get in touch</h2>
+        </div>
+        <p class="contact-text">Currently seeking internships, research collaborations, and engineering opportunities in aerospace, CFD, turbomachinery, propulsion systems, and fluid dynamics.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:arman.babaei@mail.polimi.it" class="contact-link">
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">arman.babaei@mail.polimi.it</div></div>
+        </a>
+        <a href="https://linkedin.com/in/arman1babaei" target="_blank" rel="noopener" class="contact-link">
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/arman1babaei</div></div>
+        </a>
+        <a href="https://babaei.it" class="contact-link">
+          <div><div class="contact-link-label">Website</div><div class="contact-link-value">babaei.it</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Arman Babaei</p>
+    <p>babaei.it</p>
+  </footer>
+
+  <script>
+    const animatedElements = document.querySelectorAll('.fade-up, .timeline-item, .project-card, .skill-group-title, .lang-item, .honour-item');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    animatedElements.forEach((element) => revealObserver.observe(element));
+  </script>
+</body>
+</html>
