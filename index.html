@@ -393,6 +393,8 @@
    ("Images/" holds the full-size originals and is never published.)
    Describe gallery photos with gallery:[{alt:'…'}, …] (entry 1 = <id>-2.jpg);
    add fit:'contain' for figures with labels so they are shown uncropped.
+   coverFit:'contain' (+ coverBg colour) shows a very wide or tall cover uncropped;
+   coverRatio:'w/h' makes the panel's cover frame match the photo exactly.
    Without a gallery list, `photos` sets how many gallery photos are tried.
    Missing photos simply show the placeholder.
    REPORTS: put a PDF at reports/<id>.pdf and set report:true.
@@ -406,11 +408,11 @@ const ITEMS = [
     points:['Innovative three-step heat treatment of LPBF AA2024-RAM2','Aiming for performance close to HIP','Tensile, S-N fatigue and fatigue crack growth testing','Fatigue testing of dog-bone specimens','SEM/EBSD fractography and microstructure analysis','SEM imaging of transverse and fracture surfaces of all failed samples','Identifying defects and crack initiation sites'],
     facts:[['Role','MSc Candidate'],['Where','Politecnico di Milano'],['Material','LPBF AA2024-RAM2'],['Methods','Tensile · S-N fatigue · Crack growth · SEM/EBSD · Microstructure']],
     tags:['Additive Manufacturing','Heat Treatment','Fatigue Testing','SEM/EBSD Fractography'],
-    coverAlt:'Resin-mounted samples prepared for microscopy',
+    coverAlt:'Micrograph of a precrack growing from the notch', coverFit:'contain', coverBg:'#c6c3c5', coverRatio:'1600/690',
     gallery:[
       {alt:'Test setup: specimen fixture in an MTS 647 hydraulic wedge grip', fit:'contain'},
       {alt:'Specimen geometry with its dimensions marked', fit:'contain'},
-      {alt:'Micrograph of a precrack growing from the notch', fit:'contain'},
+      {alt:'Resin-mounted samples prepared for microscopy'},
       {alt:'EBSD maps of two conditions, A and B', fit:'contain'},
       {alt:'SEM fractography of fatigue fracture surfaces, panels (a) to (f)', fit:'contain'}] },
 
@@ -550,7 +552,7 @@ const img = (id,n) => `img/${id}-${n}.jpg`;
 const galleryOf = it => it.gallery ? it.gallery.map((g,i)=>({n:i+2,...g})) : Array.from({length:it.photos||1},(_,i)=>({n:i+2}));
 const phHTML = p => `<div class="ph"><div class="ring"></div><div class="cap"><span>${p[1]}</span><span></span></div><div class="big">${p[0]}</div><div class="cap"><span></span><span>${p[2]}</span></div></div>`;
 // cover = real photo if it exists, otherwise placeholder
-const cover = it => `${phHTML(it.ph)}<img src="${img(it.id,1)}" alt="${it.coverAlt||it.name}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0">`;
+const cover = it => `${phHTML(it.ph)}<img src="${img(it.id,1)}" alt="${it.coverAlt||it.name}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0${it.coverFit?`;object-fit:${it.coverFit};background:${it.coverBg||'#fff'}`:''}">`;
 
 /* build cards */
 document.getElementById('grid').innerHTML = ITEMS.filter(i=>i.card).map(it=>`
@@ -575,7 +577,7 @@ let current=null, pushed=false;
 function render(it){
   const gallery=galleryOf(it);
   inner.innerHTML = `
-    <div class="hero-img">${cover(it)}</div>
+    <div class="hero-img"${it.coverRatio?` style="aspect-ratio:${it.coverRatio}"`:''}>${cover(it)}</div>
     <div class="d-meta"><span>${it.kind}</span><span>${it.date}</span></div>
     <div class="d-name">${it.name}</div>
     <h2 class="d-title" id="d-title">${it.title}</h2>
