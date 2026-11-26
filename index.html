@@ -366,7 +366,7 @@
   <div class="side">
     <div>Milan, Italy<br><span class="live"><i></i>Open to opportunities</span></div>
     <div><span class="label">Currently</span>MSc · Aeronautical Engineering<br>Politecnico di Milano</div>
-    <div><span class="label">Thesis</span>Three-step heat treatment of<br>LPBF AA2024-RAM2 aluminium</div>
+    <div><span class="label">Thesis</span>Heat-treatment strategies for<br>LPBF AA2024-RAM2 aluminium</div>
     <div><span class="label">Languages &amp; licence</span>Persian · English C1 · Italian B1<br>Arabic A2 · Dutch A1 (learning)<br>Driving licence A, B</div>
   </div>
 </section>
@@ -412,21 +412,28 @@
    REPORTS: put a PDF at reports/<id>.pdf and set report:true.
    ===================================================================== */
 const ITEMS = [
-  { id:'thesis', card:true, kind:'Academic · Additive Manufacturing', date:'MSc Thesis · Ongoing',
+  { id:'thesis', card:true, kind:'Academic · Additive Manufacturing', date:'MSc Thesis · 2025–2026',
     name:'MSc Thesis, Politecnico di Milano', ph:['Al','SEM · fracture','Fatigue'],
-    title:'A 3D-printed aluminium alloy, tested until it <em>cracks</em>.',
-    hook:'A three-step heat treatment of LPBF AA2024-RAM2, studied through mechanical testing and SEM/EBSD fractography.',
-    body:'My thesis studies an <b>innovative three-step heat treatment of LPBF (laser powder bed fusion) AA2024-RAM2</b>, a high-strength aluminium for aerospace, aiming for performance close to <b>HIP</b>. I evaluate it through <b>tensile, S-N fatigue and fatigue crack growth tests</b>, with <b>SEM/EBSD fractography and microstructure analysis</b>. I examine the transverse and fracture surfaces of every failed sample, looking for the defects where cracks begin.',
-    points:['Innovative three-step heat treatment of LPBF AA2024-RAM2','Aiming for performance close to HIP','Tensile, S-N fatigue and fatigue crack growth testing','Fatigue testing of dog-bone specimens','SEM/EBSD fractography and microstructure analysis','SEM imaging of transverse and fracture surfaces of all failed samples','Identifying defects and crack initiation sites'],
-    facts:[['Role','MSc Candidate'],['Where','Politecnico di Milano'],['Material','LPBF AA2024-RAM2'],['Methods','Tensile · S-N fatigue · Crack growth · SEM/EBSD · Microstructure']],
-    tags:['Additive Manufacturing','Heat Treatment','Fatigue Testing','SEM/EBSD Fractography'],
-    coverAlt:'Micrograph of a crack growing from the notch', coverRatio:'1280/802',
+    title:'Avoiding costly HIP with an innovative <em>heat treatment</em>.',
+    hook:'Heat treatments for LPBF AA2024-RAM2: tensile, fatigue crack growth and axial fatigue behaviour, read through SEM fractography.',
+    body:'My thesis investigates how post-print heat treatment changes the mechanical behaviour of <b>AA2024-RAM2</b>, a 2024-type aluminium powder with Ti and B<sub>4</sub>C additions, printed by <b>laser powder bed fusion (LPBF)</b>. The additions stop the hot cracking of conventional AA2024 and leave hard particles in the matrix, so the material behaves as a <b>metal matrix composite</b>. Because the as-built microstructure is far from equilibrium, I compared it with several heat-treatment strategies, including the <b>three-step treatment (3S)</b>, through <b>static tensile, fatigue crack growth and axial fatigue tests</b>, and interpreted the results with <b>SEM fractography</b> and EBSD.',
+    points:['<b>Material.</b> AA2024-RAM2 (Al–3.7Cu–1.5Mg–0.6Mn–2.4Ti wt%, with B<sub>4</sub>C). During melting, Ti and B<sub>4</sub>C form Al<sub>3</sub>Ti, TiB<sub>2</sub> and TiC nucleants that give fine equiaxed grains; unreacted particles stay as reinforcement',
+            '<b>Treatments.</b> Direct ageing at 180 °C; solution at 493 °C followed by ageing at 150, 180 or 240 °C; the supplier\'s treatment; the three-step treatment of Bona and Grande (400 °C/2 h + 493 °C/1 h + 150 °C/6 h); and a variant with adjusted first steps (N3S)',
+            '<b>Tensile (7 conditions).</b> The as-built state had the highest yield strength (442 MPa) and elongation (15.5 %), and every treatment lowered the yield strength. 3S kept it within 7 MPa (435 MPa) and gave the highest tensile strength (534 MPa) through stronger hardening',
+            '<b>Fatigue crack growth (AB, 3S, N3S; NASGRO fits).</b> 3S raised the threshold ΔK<sub>th</sub> from 7.1 to 8.0 MPa√m, likely through residual-stress relaxation and crack closure, but grew cracks faster above ΔK ≈ 9 MPa√m and had a lower fitted toughness. N3S did not reproduce the gain',
+            '<b>Axial fatigue (AB, 3S; R = 0.1; Basquin fits).</b> Same life above 315 MPa; at lower stress 3S lasted up to ten times longer, and the fatigue limit at 3×10⁶ cycles rose from 234–243 MPa to about 247.5 MPa',
+            '<b>Fractography (SEM).</b> The two early 3S failures started near the surface at lack-of-fusion defects of 130–170 µm associated with unmelted powder: printing defects, independent of the heat treatment',
+            '<b>Outcome.</b> The as-built state is metastable and loses yield strength when heated. 3S is a promising route: it keeps the as-built yield strength and improves near-threshold crack growth and high-cycle fatigue without HIP, and lower printing porosity could raise the fatigue strength further'],
+    facts:[['Role','MSc Candidate'],['Where','Politecnico di Milano'],['Advisor','Prof. Antonio Mattia Grande'],['Co-advisor','Marco Bona'],
+           ['Material','AA2024-RAM2 (Elementum 3D), LPBF'],['Tests','Tensile · Fatigue crack growth · Axial fatigue'],['Analysis','SEM fractography · EBSD']],
+    tags:['Additive Manufacturing','Heat Treatment','Fatigue & Fracture','Metal Matrix Composites'],
+    coverAlt:'SEM image of the crack on the polished side of a crack growth specimen after pre-cracking, growing from the notch root', coverRatio:'1280/802',
     gallery:[
       {alt:'Test setup: specimen fixture in an MTS 647 hydraulic wedge grip', fit:'contain'},
-      {alt:'Specimen geometry with its dimensions marked', fit:'contain'},
+      {alt:'Crack growth specimen geometry with its dimensions marked (37 mm long, W = 10 mm, B = 4 mm, 4 mm notch)', fit:'contain'},
       {alt:'Resin-mounted samples prepared for microscopy'},
-      {alt:'EBSD maps of two conditions, A and B', fit:'contain'},
-      {alt:'SEM fractography of fatigue fracture surfaces, panels (a) to (f)', fit:'contain'}] },
+      {alt:'EBSD grain maps, panels A and B', fit:'contain'},
+      {alt:'SEM fracture surfaces of fatigue specimens 3S-22 and 3S-24: fatigue and overload zones, lack-of-fusion pores with unmelted powder, a sub-surface cavity and inclusions', fit:'contain'}] },
 
   { id:'thermal-spray', card:true, kind:'Self-employed · Thermal Spray', date:'May 2025 – now',
     name:'Flame Spray Equipment: Testing, Refurbishment & Sales', ph:['10E','Metco · 14M','Flame spray'],
@@ -486,9 +493,9 @@ const ITEMS = [
   { id:'msc', kind:'Education', date:'Sep 2023 – Dec 2026', edu:true,
     name:'Politecnico di Milano', row:['MSc Aeronautical Engineering','Politecnico di Milano'], ph:['MSc','PoliMi','Milan'],
     title:'MSc in <em>Aeronautical</em> Engineering.',
-    body:'Master\'s degree at <b>Politecnico di Milano</b>, Italy. My thesis is on an innovative three-step heat treatment of LPBF AA2024-RAM2 aluminium.',
+    body:'Master\'s degree at <b>Politecnico di Milano</b>, Italy. My thesis investigates how heat-treatment strategies, including a three-step treatment, change the tensile, fatigue crack growth and axial fatigue behaviour of LPBF AA2024-RAM2, an aluminium metal matrix composite.',
     points:['Aerodynamics and aerodynamics of transport vehicles','Computational techniques for thermochemical propulsion','Turbomachinery','Aerospace structures and aeroelasticity','High-tech startups'],
-    facts:[['When','Sep 2023 – Dec 2026'],['Thesis','Heat treatment of LPBF AA2024-RAM2'],['Also admitted to','Case Western Reserve · George Washington University']],
+    facts:[['When','Sep 2023 – Dec 2026'],['Thesis','Heat-treatment strategies for LPBF AA2024-RAM2'],['Advisor','Prof. Antonio Mattia Grande'],['Also admitted to','Case Western Reserve · George Washington University']],
     tags:['Aeronautics','Propulsion','Structures'], photos:2, link:'thesis' },
 
   { id:'audi', kind:'Personal · Automotive', date:'2026',
