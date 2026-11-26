@@ -223,7 +223,12 @@
   .facts .label{display:block;margin-bottom:3px}
   .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:40px}
   .gallery figure{border-radius:12px;overflow:hidden;background:var(--tint);aspect-ratio:4/3}
-  .gallery img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+  .gallery img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .5s ease}
+  .gallery figure:hover img{transform:scale(1.03)}
+  .gallery figure.fit{background:#fff;border:1px solid var(--line)}
+  .gallery figure.fit img{object-fit:contain;padding:10px}
+  .gallery figure.fit:hover img{transform:none}
+  .gallery figure:last-child:nth-child(odd){grid-column:1 / -1;aspect-ratio:16/9}
   .g-empty{margin-top:40px;padding:26px;border:1px dashed #a7dfb7;border-radius:12px;font:400 12.5px var(--mono);color:var(--muted);text-align:center}
   .d-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
   .tags{font:400 12px var(--mono);color:var(--muted)}
@@ -379,9 +384,13 @@
 <script>
 /* =====================================================================
    CONTENT — every job / project is one entry here.
-   PHOTOS: put them in a folder called "images" next to this file, named
-   <id>-1.jpg, <id>-2.jpg … (e.g. images/thesis-1.jpg). Photo 1 is the cover
+   PHOTOS: web-ready copies live in "img/" next to this file, named
+   <id>-1.jpg, <id>-2.jpg … (e.g. img/thesis-1.jpg). Photo 1 is the cover
    used on the card and at the top of the panel; the rest form the gallery.
+   ("Images/" holds the full-size originals and is never published.)
+   Describe gallery photos with gallery:[{alt:'…'}, …] (entry 1 = <id>-2.jpg);
+   add fit:'contain' for figures with labels so they are shown uncropped.
+   Without a gallery list, `photos` sets how many gallery photos are tried.
    Missing photos simply show the placeholder.
    REPORTS: put a PDF at reports/<id>.pdf and set report:true.
    ===================================================================== */
@@ -393,7 +402,14 @@ const ITEMS = [
     body:'My thesis studies an <b>innovative three-step heat treatment of LPBF (laser powder bed fusion) AA2024-RAM2</b>, a high-strength aluminium for aerospace, aiming for performance close to <b>HIP</b>. I evaluate it through <b>tensile, S-N fatigue and fatigue crack growth tests</b>, with <b>SEM/EBSD fractography and microstructure analysis</b>. I examine the transverse and fracture surfaces of every failed sample, looking for the defects where cracks begin.',
     points:['Innovative three-step heat treatment of LPBF AA2024-RAM2','Aiming for performance close to HIP','Tensile, S-N fatigue and fatigue crack growth testing','Fatigue testing of dog-bone specimens','SEM/EBSD fractography and microstructure analysis','SEM imaging of transverse and fracture surfaces of all failed samples','Identifying defects and crack initiation sites'],
     facts:[['Role','MSc Candidate'],['Where','Politecnico di Milano'],['Material','LPBF AA2024-RAM2'],['Methods','Tensile · S-N fatigue · Crack growth · SEM/EBSD · Microstructure']],
-    tags:['Additive Manufacturing','Heat Treatment','Fatigue Testing','SEM/EBSD Fractography'], photos:3 },
+    tags:['Additive Manufacturing','Heat Treatment','Fatigue Testing','SEM/EBSD Fractography'],
+    coverAlt:'Resin-mounted samples prepared for microscopy',
+    gallery:[
+      {alt:'Test setup: specimen fixture in an MTS 647 hydraulic wedge grip', fit:'contain'},
+      {alt:'Specimen geometry with its dimensions marked', fit:'contain'},
+      {alt:'Micrograph of a precrack growing from the notch', fit:'contain'},
+      {alt:'EBSD maps of two conditions, A and B', fit:'contain'},
+      {alt:'SEM fractography of fatigue fracture surfaces, panels (a) to (f)', fit:'contain'}] },
 
   { id:'thermal-spray', card:true, kind:'Self-employed · Thermal Spray', date:'May 2025 – now',
     name:'Flame Spray Equipment: Testing, Refurbishment & Sales', ph:['10E','Metco · 14M','Flame spray'],
@@ -411,7 +427,11 @@ const ITEMS = [
     body:'As <b>TAPCO\'s technical representative</b>, I inspected the <b>performance tests of a turboblower</b> at the manufacturer\'s test facility, <b>Boldrocchi</b>, in Italy.',
     points:['Client technical representative for TAPCO','Inspected the performance tests of a turboblower','At the manufacturer\'s test facility (Boldrocchi), Italy'],
     facts:[['Role','Test Inspector (Client Technical Representative)'],['When','June 2025'],['Where','Boldrocchi test facility, Italy']],
-    tags:['Performance Testing','Turboblower','Inspection'], photos:2 },
+    tags:['Performance Testing','Turboblower','Inspection'],
+    coverAlt:'Test bed at the Boldrocchi test facility',
+    gallery:[
+      {alt:'On site at Boldrocchi in a hard hat'},
+      {alt:'Test control room overlooking the test hall'}] },
 
   { id:'tu5', card:true, kind:'Personal · Automotive', date:'2018 – 2022',
     name:'TU5 Engine Build', ph:['+38%','TU5 · 4-stroke','Power'],
@@ -438,7 +458,12 @@ const ITEMS = [
     body:'University projects covering <b>aerodynamics, propulsion and control</b>, from CFD of trucks and cars to the preliminary design of a turbojet and a micro-thruster for a CubeSat.',
     points:['Heavy-duty truck drag reduction with fairings (Ansys, ParaView)','Hybrid car CFD compared with wind-tunnel tests','Turbojet HP turbine and compressor design on the Brayton cycle (MATLAB)','3U CubeSat micro-thruster: 5 mN, 0.5 m/s ΔV, four architectures compared','Combustion chamber reacting flow in OpenFOAM with Lagrangian spray–wall tracking','Solid propellant characterisation for hybrid rocket engines','NACA-0015 starting vortex CFD; Hess-Smith and Weissinger codes in MATLAB','Quadrotor 6-DOF model in Simulink with PID control on each motor','Space debris removal planning with linear programming (MATLAB, AMPL)'],
     facts:[['Software','Ansys · OpenFOAM · MATLAB · Simulink'],['Where','Sharif · PoliMi']],
-    tags:['CFD','Turbomachinery','Space Propulsion'], photos:4 },
+    tags:['CFD','Turbomachinery','Space Propulsion'],
+    coverAlt:'Truck CFD: velocity vectors in the gap between cab and trailer',
+    gallery:[
+      {alt:'Truck CFD: vortex structures (Q-criterion)', fit:'contain'},
+      {alt:'Truck model with side skirts', fit:'contain'},
+      {alt:'CFD domain, sized relative to the truck length L', fit:'contain'}] },
 
   /* ---- experience & education (rows in "About"; some reuse the cards above) ---- */
   { id:'msc', kind:'Education', date:'Sep 2023 – Dec 2026', edu:true,
@@ -455,7 +480,16 @@ const ITEMS = [
     body:'The car had <b>high oil consumption, exhaust smoke and a check-engine fault</b>. I diagnosed it and <b>rebuilt the engine myself</b>, then repaired the body damage. It passed the Italian <b>revisione</b> with all faults fixed.',
     points:['Diagnosed high oil consumption, exhaust smoke and a check-engine fault','Full cylinder head overhaul','New piston rings and bearings','Cleaned the oil passages','Repaired body damage (bumper, fog light)','Passed the Italian revisione with all faults fixed'],
     facts:[['When','2026'],['Where','Milan'],['Car','Audi A3 1.2 TFSI (2011)']],
-    tags:['Engine Rebuild','Diagnostics','Bodywork'], photos:3, link:'tu5' },
+    tags:['Engine Rebuild','Diagnostics','Bodywork'], link:'tu5',
+    coverAlt:'The Audi A3 in the workshop',
+    gallery:[
+      {alt:'Engine with the cylinder head removed, pistons in the bores'},
+      {alt:'Pistons and connecting rods removed from the engine'},
+      {alt:'Disassembled engine parts in a cleaning basket'},
+      {alt:'Cylinder head and camshaft on the bench'},
+      {alt:'Valves removed from the cylinder head'},
+      {alt:'Engine bay with the timing side exposed'},
+      {alt:'Headlight masked for body repair'}] },
 
   { id:'ts-row', alias:'thermal-spray', row:['Flame spray equipment: testing, refurbishment & sales','Self-employed, Milan'], date:'May 2025 – now' },
   { id:'tapco-row', alias:'tapco', row:['Test Inspector (Client Technical Representative)','TAPCO, at Boldrocchi'], date:'Jun 2025' },
@@ -465,7 +499,14 @@ const ITEMS = [
     title:'Planning trajectories with the <em>orbital mechanics</em> team.',
     body:'Summer school at <b>Bauman Moscow State Technical University</b> in Russia, where I planned spacecraft trajectories with the orbital mechanics team in <b>STK</b>. It also included visits to space shuttle facilities and museums, and time learning from astronauts.',
     points:['Planned spacecraft trajectories with the orbital mechanics team','Trajectory planning in STK','Visited space shuttle facilities and museums','Learned from astronauts'],
-    facts:[['When','July 2023'],['Where','Moscow, Russia'],['Software','STK']], tags:['Orbital Mechanics','STK'], photos:2 },
+    facts:[['When','July 2023'],['Where','Moscow, Russia'],['Software','STK']], tags:['Orbital Mechanics','STK'],
+    coverAlt:'At a space museum during the summer school',
+    gallery:[
+      {alt:'Next to a spacesuit on display'},
+      {alt:'Seated beside a spacesuit'},
+      {alt:'In an aviation museum hangar'},
+      {alt:'In front of a jet aircraft at an outdoor aviation museum'},
+      {alt:'Summer school group in front of a space capsule'}] },
 
   { id:'mapna', kind:'Industry · Engines', date:'Jan – Jun 2023',
     name:'MAPNA Turbine (TUGA) · Co-op', row:['Junior Engineer (Co-op), Engine & Aircraft Equipment','MAPNA Turbine (TUGA)'], ph:['CMM','Engines','2023'],
@@ -502,10 +543,11 @@ const ITEMS = [
 const byId = Object.fromEntries(ITEMS.map(i=>[i.id,i]));
 const real = id => byId[id].alias ? byId[byId[id].alias] : byId[id];
 const ORDER = ITEMS.filter(i=>!i.alias).map(i=>i.id);
-const img = (id,n) => `images/${id}-${n}.jpg`;
+const img = (id,n) => `img/${id}-${n}.jpg`;
+const galleryOf = it => it.gallery ? it.gallery.map((g,i)=>({n:i+2,...g})) : Array.from({length:it.photos||1},(_,i)=>({n:i+2}));
 const phHTML = p => `<div class="ph"><div class="ring"></div><div class="cap"><span>${p[1]}</span><span></span></div><div class="big">${p[0]}</div><div class="cap"><span></span><span>${p[2]}</span></div></div>`;
 // cover = real photo if it exists, otherwise placeholder
-const cover = it => `${phHTML(it.ph)}<img src="${img(it.id,1)}" alt="${it.name}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0">`;
+const cover = it => `${phHTML(it.ph)}<img src="${img(it.id,1)}" alt="${it.coverAlt||it.name}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0">`;
 
 /* build cards */
 document.getElementById('grid').innerHTML = ITEMS.filter(i=>i.card).map(it=>`
@@ -528,7 +570,7 @@ const body=document.body, inner=document.getElementById('p-inner'), panel=docume
 let current=null, pushed=false;
 
 function render(it){
-  const gallery=[]; for(let n=2;n<=(it.photos||1)+1;n++) gallery.push(n);
+  const gallery=galleryOf(it);
   inner.innerHTML = `
     <div class="hero-img">${cover(it)}</div>
     <div class="d-meta"><span>${it.kind}</span><span>${it.date}</span></div>
@@ -539,7 +581,7 @@ function render(it){
       <ul class="d-list">${it.points.map(p=>`<li>${p}</li>`).join('')}</ul>
       <div class="facts">${it.facts.map(f=>`<div><span class="label">${f[0]}</span>${f[1]}</div>`).join('')}</div>
     </div>
-    <div class="gallery" id="gallery">${gallery.map(n=>`<figure><img src="${img(it.id,n)}" alt="${it.name} photo ${n}" loading="lazy" onerror="this.parentNode.remove();checkGallery()"></figure>`).join('')}</div>
+    <div class="gallery" id="gallery">${gallery.map(g=>`<figure${g.fit==='contain'?' class="fit"':''}><img src="${img(it.id,g.n)}" alt="${g.alt||it.name+' photo '+g.n}" loading="lazy" onerror="this.parentNode.remove();checkGallery()"></figure>`).join('')}</div>
     <div class="d-foot">
       <div class="tags">${it.tags.join('<i>/</i>')}</div>
       ${it.link ? `<button class="report" data-open="${it.link}">See ${byId[it.link].name.split(',')[0]} →</button>`
