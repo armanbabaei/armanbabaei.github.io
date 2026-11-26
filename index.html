@@ -110,7 +110,7 @@
   .hero{min-height:calc(100dvh - 56px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:clamp(32px,5vw,96px);
         padding:80px var(--pad) 60px;position:relative}
   .hello{font:400 clamp(26px,3.2vw,40px)/1 var(--serif);color:var(--ink-2)}
-  h1{font:600 clamp(88px,14.5vw,216px)/.9 var(--serif);letter-spacing:-.025em;margin:6px 0 30px;margin-left:-.04em}
+  h1{font:600 clamp(88px,14.5vw,216px)/.9 var(--serif);letter-spacing:-.025em;margin:6px 0 12px;margin-left:-.04em}
 
   /* portrait: fades in on load, lifts and tilts slightly on hover */
   .portrait-wrap{animation:portraitIn .9s .15s cubic-bezier(.2,.8,.2,1) both}
@@ -122,10 +122,22 @@
   .portrait:hover{transform:translateY(-6px) rotate(-2deg);box-shadow:0 0 0 10px var(--white),0 0 0 11px var(--accent-2),0 44px 80px -34px rgba(15,61,38,.55)}
   .portrait:hover img{transform:scale(1.04)}
   @media (prefers-reduced-motion:reduce){ .portrait-wrap{animation:none} .portrait,.portrait img{transition:none} .portrait:hover,.portrait:hover img{transform:none} }
-  h1 .dot{color:var(--accent)}
-  .role{font:500 13px var(--sans);color:var(--muted);margin-bottom:24px}
-  .intro{font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--muted);max-width:40ch}
 
+  /* streamlines: potential flow around the portrait, left → right */
+  .hero > .hero-text,.hero > .portrait-wrap{position:relative;z-index:1}
+  .flow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0;transition:opacity 1.2s ease .3s;
+        -webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent)}
+  .flow.ready{opacity:1}
+  .flow path{fill:none;stroke-linecap:round}
+  .flow .s{stroke:url(#flowBase);stroke-width:1.1}
+  .flow .p{stroke:url(#flowPulse);stroke-width:1.8;stroke-dasharray:48 352;animation:flowRun linear infinite}
+  @keyframes flowRun{to{stroke-dashoffset:-400}}
+  @media (prefers-reduced-motion:reduce){ .flow .p{display:none} .flow{transition:none} }
+  h1 .dot{color:var(--accent)}
+  .intro{font-size:clamp(18px,1.7vw,22px);line-height:1.5;color:var(--ink-2);max-width:40ch;margin-bottom:18px}
+  .hero-bio{font-size:clamp(15px,1.12vw,17px);line-height:1.65;color:var(--muted);max-width:58ch}
+  .hero-bio + .hero-bio{margin-top:12px}
+  .hero-bio b{color:var(--ink-2);font-weight:600}
   /* ---------- highlights strip ---------- */
   .strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px var(--pad)}
   .strip button{padding:0 22px;border-left:1px solid var(--line)}
@@ -164,8 +176,6 @@
   .disc{list-style:none;margin-top:28px}
   .disc li{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--line)}
   .statement{font:600 clamp(30px,3.8vw,50px)/1.12 var(--sans);letter-spacing:-.03em;max-width:20ch}
-  .about-p{font-size:clamp(16px,1.4vw,18px);color:var(--muted);margin-top:24px;max-width:58ch}
-  .about-p b{color:var(--ink-2);font-weight:600}
   .path-head{margin:56px 0 8px;display:flex;justify-content:space-between}
   .path{border-top:1px solid var(--line)}
   .row{width:100%;display:grid;grid-template-columns:150px 1fr auto;gap:20px;align-items:center;padding:15px 8px;border-bottom:1px solid var(--line);font-size:15px;transition:background .25s, padding .25s}
@@ -294,11 +304,14 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero">
+  <svg class="flow" id="flow" aria-hidden="true" focusable="false"></svg>
   <div class="hero-text">
     <div class="hello">Ciao, I'm</div>
     <h1>Arman<span class="dot">.</span></h1>
-    <p class="role">Aeronautical Engineer · Additive Manufacturing &amp; Thermal Spray</p>
-    <p class="intro">I work where materials meet machines: 3D-printed aerospace alloys, flame spray guns, CNC machining and engines. Now at Politecnico di Milano, MSc Aeronautical Engineering.</p>
+    <p class="intro">An Aeronautical Engineer in the making.</p>
+    <p class="hero-bio">My MSc thesis looked at an innovative heat treatment for <b>LPBF AA2024-RAM2 aluminium</b> to understand how processing affects performance.</p>
+    <p class="hero-bio">Outside the lab I work hands-on. I've inspected the <b>performance tests of a turboblower</b>, worked as a junior engineer at <b>MAPNA Turbine (TUGA)</b>, and operated different machines such as CNC and manual ones in an automotive workshop. I also buy, test, refurbish if needed, and sell <b>flame spray equipment</b>.</p>
+    <p class="hero-bio">Beyond engineering, I have a strong interest in <b>business, trading, and international import and export</b>. I enjoy exploring opportunities where technical expertise and entrepreneurship come together to make money.</p>
   </div>
   <div class="portrait-wrap">
     <figure class="portrait"><img src="img/portrait.jpg" alt="Portrait of Arman Babaei" width="800" height="800" fetchpriority="high"></figure>
@@ -333,7 +346,6 @@
   </div>
   <div class="reveal">
     <p class="statement">I build things that <em>have to work</em>: in the lab, on the shop floor and at the test bench.</p>
-    <p class="about-p"><b>Sharif. MAPNA Turbine. PoliMi.</b> Each step added something: machining tolerances on the shop floor, engine maintenance manuals at MAPNA Turbine, and fatigue and fractography in a materials lab. I'm happiest when analysis and hands-on work meet.</p>
     <div class="path-head"><span class="label">Experience &amp; Education</span><span class="label">Open →</span></div>
     <div class="path" id="path"></div>
   </div>
@@ -631,6 +643,60 @@ window.addEventListener('popstate',()=>{
 });
 // deep link, e.g. babaei.it/#/thermal-spray
 { const m=location.hash.match(/^#\/(.+)/); if(m && byId[m[1]]) openItem(m[1],false); }
+
+/* ---------- hero streamlines ----------
+   Inviscid flow past a cylinder (the portrait): stream function psi = y(1 - R²/r²).
+   Each line keeps its upstream height y0 and is solved for y at every x. */
+(function(){
+  const hero=document.querySelector('.hero'), fig=document.querySelector('.portrait'), svg=document.getElementById('flow');
+  if(!hero||!fig||!svg) return;
+  const solve=(x,y0,R)=>{                       // y > 0 with y(1 - R²/(x²+y²)) = y0, outside the cylinder
+    let lo=Math.sqrt(Math.max(R*R-x*x,0)), hi=y0+R;
+    for(let i=0;i<36;i++){ const m=(lo+hi)/2; (m*(1-R*R/(x*x+m*m))-y0>0)?hi=m:lo=m; }
+    return (lo+hi)/2;
+  };
+  // stable pseudo-random so the pulses don't jump around when the layout is redrawn
+  const rnd=i=>{ const s=Math.sin(i*12.9898)*43758.5453; return s-Math.floor(s); };
+  function draw(){
+    const W=hero.clientWidth, H=hero.clientHeight; if(!W||!H) return;
+    const small=innerWidth<=900;
+    // position relative to the hero; offsets ignore the hover/entrance transforms
+    const wrap=fig.offsetParent, r=fig.offsetWidth/2, cx=wrap.offsetLeft+fig.offsetLeft+r, cy=wrap.offsetTop+fig.offsetTop+r;
+    const R=r+(small?20:28), gap=small?22:26, step=8;
+    const t0=Math.max(0,(cx-R)/W), t1=Math.min(1,(cx+R)/W);
+    const stops=(a)=>`<stop offset="0" stop-color="#16a34a" stop-opacity="${.05*a}"/>`+
+      `<stop offset="${(t0*.55).toFixed(3)}" stop-color="#16a34a" stop-opacity="${.10*a}"/>`+
+      `<stop offset="${t0.toFixed(3)}" stop-color="#16a34a" stop-opacity="${.42*a}"/>`+
+      `<stop offset="${t1.toFixed(3)}" stop-color="#16a34a" stop-opacity="${.42*a}"/>`+
+      `<stop offset="1" stop-color="#16a34a" stop-opacity="${.16*a}"/>`;
+    const k=small?.5:1;                         // stacked layout: lines run behind the text, so keep them quieter
+    // soft "quiet zone" behind the actual text so the lines don't cut through letters
+    const text=hero.querySelector('.hero-text'), range=document.createRange(); range.selectNodeContents(text);
+    const tr=range.getBoundingClientRect(), hr=hero.getBoundingClientRect();
+    const qx=tr.left-hr.left-20, qy=tr.top-hr.top-16, qw=tr.width+40, qh=tr.height+32;
+    let out=`<defs><linearGradient id="flowBase" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${W}" y2="0">${stops(k)}</linearGradient>`+
+            `<linearGradient id="flowPulse" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${W}" y2="0">${stops(2.1*k)}</linearGradient>`+
+            `<filter id="flowFeather" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>`+
+            `<mask id="flowMask" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#fff"/>`+
+            `<rect x="${qx}" y="${qy}" width="${qw}" height="${qh}" rx="28" fill="#000" fill-opacity=".82" filter="url(#flowFeather)"/></mask></defs><g mask="url(#flowMask)">`;
+    const kmax=Math.ceil(Math.max(cy,H-cy)/gap)+1; let n=0;
+    for(let k=1;k<=kmax;k++){
+      const y0=(k-.5)*gap;                      // half-gap offset: no line runs into the stagnation point
+      for(const sgn of [-1,1]){
+        const edge=cy+sgn*y0; if(edge<-gap||edge>H+gap) continue;
+        let d='';
+        for(let X=0;X<=W+step;X+=step){ const Y=cy+sgn*solve(X-cx,y0,R); d+=(X?'L':'M')+X+' '+Y.toFixed(1); }
+        const dur=(6+rnd(++n)*5).toFixed(2), delay=(-rnd(n+99)*10).toFixed(2);
+        out+=`<path class="s" d="${d}"/><path class="p" d="${d}" style="animation-duration:${dur}s;animation-delay:${delay}s"/>`;
+      }
+    }
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.innerHTML=out+'</g>'; svg.classList.add('ready');
+  }
+  let raf=0; const queue=()=>{ cancelAnimationFrame(raf); raf=requestAnimationFrame(draw); };
+  new ResizeObserver(queue).observe(hero);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(queue);
+  queue();
+})();
 
 /* ---------- email, reveal ---------- */
 document.getElementById('yr').textContent=new Date().getFullYear();
