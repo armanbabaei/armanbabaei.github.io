@@ -420,7 +420,7 @@ const ITEMS = [
     points:['Innovative three-step heat treatment of LPBF AA2024-RAM2','Aiming for performance close to HIP','Tensile, S-N fatigue and fatigue crack growth testing','Fatigue testing of dog-bone specimens','SEM/EBSD fractography and microstructure analysis','SEM imaging of transverse and fracture surfaces of all failed samples','Identifying defects and crack initiation sites'],
     facts:[['Role','MSc Candidate'],['Where','Politecnico di Milano'],['Material','LPBF AA2024-RAM2'],['Methods','Tensile · S-N fatigue · Crack growth · SEM/EBSD · Microstructure']],
     tags:['Additive Manufacturing','Heat Treatment','Fatigue Testing','SEM/EBSD Fractography'],
-    coverAlt:'Micrograph of a precrack growing from the notch', coverFit:'contain', coverBg:'#c6c3c5', coverRatio:'1600/690',
+    coverAlt:'Micrograph of a crack growing from the notch', coverRatio:'1280/802',
     gallery:[
       {alt:'Test setup: specimen fixture in an MTS 647 hydraulic wedge grip', fit:'contain'},
       {alt:'Specimen geometry with its dimensions marked', fit:'contain'},
@@ -560,7 +560,8 @@ const ITEMS = [
 const byId = Object.fromEntries(ITEMS.map(i=>[i.id,i]));
 const real = id => byId[id].alias ? byId[byId[id].alias] : byId[id];
 const ORDER = ITEMS.filter(i=>!i.alias).map(i=>i.id);
-const img = (id,n) => `img/${id}-${n}.jpg`;
+const IMG_VERSION = '2026-11-26b';   // bump whenever photos in img/ are replaced or renumbered, so browsers don't show stale copies
+const img = (id,n) => `img/${id}-${n}.jpg?v=${IMG_VERSION}`;
 const galleryOf = it => it.gallery ? it.gallery.map((g,i)=>({n:i+2,...g})) : Array.from({length:it.photos||1},(_,i)=>({n:i+2}));
 const phHTML = p => `<div class="ph"><div class="ring"></div><div class="cap"><span>${p[1]}</span><span></span></div><div class="big">${p[0]}</div><div class="cap"><span></span><span>${p[2]}</span></div></div>`;
 // cover = real photo if it exists, otherwise placeholder
